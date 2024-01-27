@@ -7,6 +7,7 @@ import { ChatsModule } from './chats/chats.module';
 import mongodbConfig from '././shared/config/mongodb.config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ProfilesModule } from './profile/profiles/profiles.module';
 
 
 @Module({
@@ -24,7 +25,8 @@ import { UsersModule } from './users/users.module';
     }),
     ChatsModule,
     AuthModule,
-    UsersModule
+    UsersModule,
+    ProfilesModule
   ],
   controllers: [AppController],
   providers: [AppService],

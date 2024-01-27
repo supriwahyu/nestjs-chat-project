@@ -3,9 +3,6 @@ import mongoose, { Document } from "mongoose";
 
 export type UserDocument = User & Document;
 
-
-
-
 @Schema({
     toJSON: {
         getters: true,
@@ -28,9 +25,6 @@ export class User {
 
 }
 
-
 const UserSchema = SchemaFactory.createForClass(User)
-
-
 
 export { UserSchema };
