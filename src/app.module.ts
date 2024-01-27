@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ChatsModule } from './chats/chats.module';
 import mongodbConfig from '././shared/config/mongodb.config';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -20,7 +21,8 @@ import mongodbConfig from '././shared/config/mongodb.config';
       }),
       inject: [ConfigService]
     }),
-    ChatsModule
+    ChatsModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -29,7 +31,7 @@ export class AppModule {
   static port: number | string;
 
   constructor(private readonly configService: ConfigService) {
-      AppModule.port = this.configService.get('PORT');
+      AppModule.port = process.env.PORT;
   }
 
   static getBaseUrl(app: INestApplication): string {
@@ -39,5 +41,3 @@ export class AppModule {
       }
   }
 }
-
-

@@ -1,4 +1,4 @@
-import { ApiTags, ApiBody, ApiCreatedResponse } from '@nestjs/swagger';
+import { ApiBody, ApiCreatedResponse } from '@nestjs/swagger';
 import { AuthDto } from './dto/auth.dto';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { AuthService } from './auth.service';
@@ -7,8 +7,7 @@ import RequestWithUser from './requestWithUser.interface';
 import { AccessTokenGuard } from '../common/guards/accessToken.guard'
 import { RefreshTokenGuard } from '../common/guards/refreshToken.guard'
 
-@Controller('auth')
-@ApiTags('Authentication')
+@Controller()
 export class AuthController {
     constructor(private authService: AuthService) {}
 
@@ -21,7 +20,7 @@ export class AuthController {
         status: 201,
         description: 'returns 201 status and a refresh and access token when a user successfully signs up',
     })
-    @Post('signup')
+    @Post('register')
     signup(@Body() createUserDto: CreateUserDto) {
       return this.authService.signUp(createUserDto);
     }
@@ -36,7 +35,7 @@ export class AuthController {
         status: 200,
         description: 'returns 200 status and a refresh and access token when a user successfully signs in',
     })
-    @Post('signin')
+    @Post('login')
     signin(@Body() data: AuthDto) {
       return this.authService.signIn(data);
     }
