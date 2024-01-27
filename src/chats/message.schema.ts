@@ -4,9 +4,6 @@ import mongoose, { Document } from "mongoose";
 
 export type MessageDocument = Message & Document;
 
-
-
-
 @Schema({
     toJSON: {
         getters: true,
@@ -15,17 +12,13 @@ export type MessageDocument = Message & Document;
     timestamps: true,
 })
 export class Message {
-    @Prop({ required: true, unique: true })
+    @Prop({ required: true })
     message: string
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
     user: User
-
 }
 
-
 const MessageSchema = SchemaFactory.createForClass(Message)
-
-
 
 export { MessageSchema };
