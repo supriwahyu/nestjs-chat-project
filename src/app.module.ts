@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ChatsModule } from './chats/chats.module';
 import mongodbConfig from '././shared/config/mongodb.config';
 import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 
 @Module({
@@ -22,7 +23,8 @@ import { AuthModule } from './auth/auth.module';
       inject: [ConfigService]
     }),
     ChatsModule,
-    AuthModule
+    AuthModule,
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -30,13 +30,11 @@ export class ChatsService {
 
 
     async createMessage(message: MessageDto, userId: string) {
-        const newMessage = new this.messageModel({...message, userId})
-        await newMessage.save
-        return newMessage
+        await new this.messageModel({...message, userId}).save();
     }
 
     async getAllMessages() {
-        return this.messageModel.find().populate('user')
+        return this.messageModel.find().populate('user');
     }
 
     
