@@ -30,9 +30,6 @@ export class CreateUserDto {
         required: true
     })
     @IsString()
-    @IsNotEmpty()
-    @Match('password', { message: 'Passwords should match'})
-    passwordConfirm: string
 
     @ApiProperty({
         type: String,

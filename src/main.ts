@@ -3,11 +3,7 @@ import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 import { Logger, ValidationPipe } from '@nestjs/common';
-import { setupSwagger } from './utils /swagger';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
-
-
-
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
@@ -26,9 +22,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api')
   app.useGlobalFilters(new HttpExceptionFilter());
 
-  setupSwagger(app)
   app.use(helmet())
-
 
   await app.listen(AppModule.port)
 
@@ -38,5 +32,3 @@ async function bootstrap() {
   logger.log(`API Documentation available at ${url}/docs`);
 }
 bootstrap();
-
-// node -e "console.log(require('crypto').randomBytes(256).toString('base64'));"
