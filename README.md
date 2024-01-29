@@ -25,14 +25,35 @@
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+NestJS Chat App 🚀 This powerful chat application, built with NestJS, brings a seamless blend of user authentication, CRUD functionality, and real-time chat features. Dive into a secure and efficient user experience with JWT-powered login, robust CRUD operations, and a dynamic WebSocket-driven chat system.
 
 ## Installation
+
+First of all, you need to clone this repository to your local mechine, and run npm install, its should be work, dont worry its just install node dependecy in the app in order the app run in your local.
 
 ```bash
 $ npm install
 ```
 
+## Env file
+
+Secondly,configure the env file, in order the app run in each different local mechine, its necessery to create the env file. first, mongo_uri can be found in your local database, typically take the form of mongodb://localhost:27017/ , where is the name of the database you want to connect to. second,jwt_access_secret and jwt_refresh_secret can manually add, you can get one or generate one form https://www.javainuse.com/jwtgenerator this website. third is port, this is your localhost port usually by default is 3000, fourth is rabbitMq configuration, so in order the notification you must configure this, user and password is your secret credintional, but by default is guest guest, the host is by default is localhost:5672, and last is queue name, you must created it first in rabbitMq in order it run.
+
+```
+MONGO_URI = ''
+JWT_ACCESS_SECRET = ''
+JWT_REFRESH_SECRET = ''
+PORT = ''
+
+RABBITMQ_USER=''
+RABBITMQ_PASSWORD=''
+RABBITMQ_HOST=''
+RABBITMQ_QUEUE_NAME=''
+```
+
 ## Running the app
+
+Third is running the app, after all above stuff is done, now finally you can running the app by run npm run start in console, dont forget you must in your dir to make it run like cd yourDir/
 
 ```bash
 # development
@@ -47,6 +68,8 @@ $ npm run start:prod
 
 ## Test
 
+Finally the last is the test, im not too confident with this one, its still throw some error so its still need some work in order passed the all test.
+
 ```bash
 # unit tests
 $ npm run test
@@ -57,6 +80,57 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Additional info
+
+the registration data is like below, so in order to chat or do other stuff you need to login or register via jwt auth,
+
+```
+{
+    "username": "yourUsername",
+    "email": "yourEmail@example.com",
+    "password": "yourPassword"
+}
+```
+
+and for creating profile you can use,
+
+```
+{
+   "name": "string",
+   "gender": "string",
+   "birthday": "string",
+   "horoscope": "string",
+   "zodiac": "string",
+   "height": "string",
+   "weight": "string"
+}
+
+```
+
+and for chat you can use,
+
+```
+{
+    "message": "yourMassage",
+    "user": "userId in your database"
+}
+```
+
+routes all exist,
+
+/api/createProfile
+/api/getProfile
+/api/updateProfile
+for profile
+
+/api/viewMessages
+/api/sendMessage
+for chat
+
+/api/register/
+/api/login/
+for auth user
 
 ## Support
 
@@ -71,3 +145,5 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+Thanks.
