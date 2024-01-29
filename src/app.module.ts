@@ -8,6 +8,9 @@ import mongodbConfig from '././shared/config/mongodb.config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ProfilesModule } from './profile/profiles/profiles.module';
+import { ClientsModule } from '@nestjs/microservices';
+import { Transport } from '@nestjs/microservices';
+import { QueueModule } from './queues/queue.module';
 
 
 @Module({
@@ -23,10 +26,24 @@ import { ProfilesModule } from './profile/profiles/profiles.module';
       }),
       inject: [ConfigService]
     }),
+    ClientsModule.register([
+      {
+        name: 'MATH_SERVICE',
+        transport: Transport.RMQ,
+        options: {
+          urls: [`amqp://${process.env.RABBITMQ_USER}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOST}`],
+          queue: process.env.RABBITMQ_QUEUE_NAME,
+          queueOptions: {
+            durable: false
+          },
+        },
+      },
+    ]),
     ChatsModule,
     AuthModule,
     UsersModule,
-    ProfilesModule
+    ProfilesModule,
+    QueueModule
   ],
   controllers: [AppController],
   providers: [AppService],
