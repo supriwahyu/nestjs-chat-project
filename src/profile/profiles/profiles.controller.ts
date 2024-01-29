@@ -30,7 +30,7 @@ export class ProfilesController {
       return this.profilesService.update(id, updateProfileDto);
     }
   
-    @Delete('updateProfile/:id')
+    @Delete('deleteProfile/:id')
     remove(@Param('id') id: string) {
       return this.profilesService.remove(id);
     }

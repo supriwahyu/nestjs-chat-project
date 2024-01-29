@@ -12,7 +12,7 @@ export type MessageDocument = Message & Document;
     timestamps: true,
 })
 export class Message {
-    @Prop({ required: true })
+    @Prop()
     message: string
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })

@@ -1,15 +1,13 @@
 import { Module } from '@nestjs/common';
-import { ChatsController } from './chats.controller';
-import { ChatsService } from './chats.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from 'src/users/schemas/user.schema';
+import { ConsumerService } from './consumer.file';
+import { ProducerService } from './producer.file';
+import { ChatsService } from 'src/chats/chats.service';
 import { AuthService } from 'src/auth/auth.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Message, MessageSchema } from 'src/chats/message.schema';
+import { User, UserSchema } from 'src/users/schemas/user.schema';
 import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { Message } from './message.schema';
-import { MessageSchema } from './message.schema';
-import { ChatGateway } from './chat.gateway';
-
 
 @Module({
   imports: [MongooseModule.forFeature([
@@ -19,7 +17,7 @@ import { ChatGateway } from './chat.gateway';
     { name: User.name, schema: UserSchema }
   ])
 ],
-  controllers: [ChatsController],
-  providers: [ChatsService, AuthService, UsersService, JwtService, ChatGateway]
+  providers: [ProducerService, ConsumerService, ChatsService, AuthService, UsersService, JwtService],
+  exports: [ProducerService],
 })
-export class ChatsModule {}
+export class QueueModule {}

@@ -6,5 +6,4 @@ export class MessageDto {
     @IsString()
     @IsNotEmpty()
     message: string
-
 }
